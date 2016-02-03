@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+#coding:utf-8
 import shutil
 import operator
 from optparse import OptionParser
@@ -72,6 +72,8 @@ def listrun():
             totaldistance = running_distance
 
         print(LINE_FORMAT%(running_day,running_during,running_distance,running_speed))
+    if monthtag!=" ":
+        print("   %-12s 总时长:%-5d总距离:%-7.2f  配速:%-10s"%("",totalduring,totaldistance,calcspeed(totalduring,totaldistance)))
 
 parser = OptionParser()
 parser.add_option("-a","--add",
