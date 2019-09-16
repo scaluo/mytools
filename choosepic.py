@@ -1,5 +1,5 @@
 #选照片工具
-#按s键保存选中照片，右键 下一张 左键 上一张 选中照片目录默认在choosepic里
+#按s键保存选中照片，右键 下一张 左键 上一张 选中照片目录默认在choosepic里，选过的图片显示为黑白
 #需安装cv2
 
 #! /usr/bin/env python3
@@ -32,12 +32,16 @@ def showImage(filename):
         newheight = MAX_LENGTH
         newwidth = int(newheight*width/height)
     img2 = cv2.resize(img,(newwidth,newheight))
+    #选过的图片灰化
+    if os.path.exists(CHOOSE_DIR+'/'+filename):
+        img2 = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)
     cv2.imshow('image',img2)
 
 def choosePic(filename):
     if not os.path.exists(CHOOSE_DIR):
         os.mkdir(CHOOSE_DIR)
-    copyfile(filename,CHOOSE_DIR+'/'+filename)
+    if not os.path.exists(CHOOSE_DIR+'/'+filename):
+        copyfile(filename,CHOOSE_DIR+'/'+filename)
 
 def showPics(piclist):
     picCount = len(piclist)
