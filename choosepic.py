@@ -1,5 +1,5 @@
 #选照片工具
-#按s键保存选中照片，l键 上一张 j键 下一张 选中照片目录默认在choosepic里
+#按s键保存选中照片，右键 下一张 左键 上一张 选中照片目录默认在choosepic里
 #需安装cv2
 
 #! /usr/bin/env python3
@@ -46,17 +46,17 @@ def showPics(piclist):
     index = 0
     showImage(piclist[index])
     while True:
-        key = cv2.waitKey(0)
+        key = cv2.waitKeyEx(0)  #用waitkey捕捉不到左右键
         if  key == 27:
             cv2.destroyAllWindows()
             break
-        if key == ord('j'):
+        if key == 2555904:  #右键
             if index == picCount-1:
                 index = 0
             else:
                 index +=1
             showImage(piclist[index])
-        if key == ord('l'):
+        if key == 2424832:  #左键
             if index == 0:
                 index = picCount-1
             else:
