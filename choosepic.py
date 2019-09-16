@@ -1,5 +1,5 @@
 #选照片工具
-#按s键保存选中照片，右键 下一张 左键 上一张 选中照片目录默认在choosepic里，选过的图片显示为黑白
+#按s键保存选中照片，按d键删除选中照片，右键 下一张 左键 上一张 选中照片目录默认在choosepic里，选过的图片显示为黑白
 #需安装cv2
 
 #! /usr/bin/env python3
@@ -43,6 +43,10 @@ def choosePic(filename):
     if not os.path.exists(CHOOSE_DIR+'/'+filename):
         copyfile(filename,CHOOSE_DIR+'/'+filename)
 
+def unchoosePic(filename):
+    if os.path.exists(CHOOSE_DIR+'/'+filename):
+        os.remove(CHOOSE_DIR+'/'+filename)
+
 def showPics(piclist):
     picCount = len(piclist)
     if len(piclist)==0:
@@ -68,6 +72,10 @@ def showPics(piclist):
             showImage(piclist[index])
         if key == ord('s'):
             choosePic(piclist[index])
+            showImage(piclist[index])
+        if key == ord('d'):
+            unchoosePic(piclist[index])
+            showImage(piclist[index])
 
 if __name__== '__main__':
     piclist = getPicFiles()
